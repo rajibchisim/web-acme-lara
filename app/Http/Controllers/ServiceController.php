@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ServiceController extends Controller
 {
@@ -29,6 +30,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
+        Log::info('Hello create url');
         return view('pages.service-create')->with('title', 'Create new service');
     }
 
@@ -40,7 +42,22 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        echo 'Preparing for store into database';
+        Log::info('Hello save url');
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+        ]);
+
+        $service = new Service();
+        $service->title = $request->title;
+        $service->description = $request->description;
+        $service->price = $request->price;
+
+        if( $service->save()){
+            return redirect('admin');
+        }
+        else return response('rejected', 400);
     }
 
     /**
