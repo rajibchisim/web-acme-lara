@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +26,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $data = Array(
+            'title' => 'Service by us',
+            'services' => []
+        );
+        if(Auth::user()){
+            $id = Auth::user()->id;
+            $user = User::find($id);
+            $data['services'] = $user->services;
+        }
+
+        
+        return view('dashboard')->with($data);
+        // return view('dashboard');
     }
 }

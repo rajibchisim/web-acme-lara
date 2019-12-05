@@ -2,7 +2,7 @@
 @section('content')
     @include('inc.newsletter')
     
-    <section class="container clearfix">
+    <section class="content clearfix">
         <main class="about">
             <h1>About Us</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius auctor lacus nec feugiat. Phasellus sit amet ex ipsum. Praesent pharetra tincidunt tempor. Etiam velit eros, dapibus eget porta in, lacinia et magna. Nam eget eros non orci consectetur congue at ac augue. Proin eget arcu in enim feugiat ultricies. Curabitur maximus metus nec metus pretium viverra at et orci. Integer hendrerit ante ut placerat cursus.</p>

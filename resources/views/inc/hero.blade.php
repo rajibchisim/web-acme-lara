@@ -1,4 +1,7 @@
-<header class="container showcase">
+<header class="content showcase">
     <h1>Affordable Professional Web Design</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu luctus ipsum, rhoncus semper magna. Nulla nec magna sit amet sem interdum condimentum.</p>
+    <p>Hi, I am Rajib Chisim and welcome to my laravel demo project.<br>
+        For <span style="color: #e8491d">CRUD</span> demo please visit <span style="color: #e8491d">Services</span> page.<br>
+               
+    </p>
 </header>

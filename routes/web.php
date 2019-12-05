@@ -18,7 +18,7 @@ Route::get('/', 'PagesController@index');
 Route::get('about', 'PagesController@about');
 Route::get('service', 'PagesController@service');
 
-Route::resource('admin', 'ServiceController');
+Route::resource('services', 'ServiceController');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');

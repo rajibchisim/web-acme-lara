@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class ServiceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,12 +21,13 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $payload = Array(
-            'title' => 'Admin area',
-            'services' => Service::all()
-        );
+        return 'All services.....';
+        // $payload = Array(
+        //     'title' => 'Admin area',
+        //     'services' => Service::all()
+        // );
 
-        return view('pages.admin')->with($payload);
+        // return view('pages.admin')->with($payload);
     }
 
     /**
@@ -53,9 +60,10 @@ class ServiceController extends Controller
         $service->title = $request->title;
         $service->description = $request->description;
         $service->price = $request->price;
+        $service->user_id = Auth::user()->id;
 
         if( $service->save()){
-            return redirect('admin');
+            return redirect('dashboard');
         }
         else return response('rejected', 400);
     }
@@ -68,8 +76,6 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        //
-        echo 'hello '.$id;
     }
 
     /**
@@ -108,7 +114,7 @@ class ServiceController extends Controller
         $service->price = $request->price;
 
         if( $service->save()){
-            return redirect('admin');
+            return redirect('dashboard');
         }
         else return response('rejected', 400);
     }
@@ -121,6 +127,12 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        echo 'delete: '.$id;
+        // check service belongs to user
+        $userid = Auth::user()->id;
+        $service = Service::find($id);
+        if($userid == $service->user_id){
+            $service->forceDelete();
+        }
+        return redirect('dashboard');
     }
 }
